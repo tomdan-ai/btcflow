@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useWalletStore } from '@/lib/store';
 import { getBtcBalance } from '@/lib/bitcoin';
-import { checkSbtcBalance } from '@/lib/deposit';
+import { checkSbtcBalance, pollBtcConfirmations } from '@/lib/deposit';
 import DepositWizard from './DepositWizard';
 import WithdrawWizard from './WithdrawWizard';
 import SwapPanel from './SwapPanel';
@@ -23,6 +23,19 @@ export default function Dashboard() {
       try {
         const btcBal = await getBtcBalance(btcAddress, btcNetwork || 'testnet');
         setBtcBalance(btcBal);
+
+        // Check pending transactions status to auto-confirm demo sBTC
+        const state = useWalletStore.getState();
+        for (const tx of state.transactions) {
+          if (tx.status === 'pending' && tx.type === 'deposit') {
+            console.log(`Checking status for pending deposit: ${tx.txid}`);
+            const confirmations = await pollBtcConfirmations(tx.txid);
+            if (confirmations >= 1) {
+              console.log(`Deposit ${tx.txid} confirmed! Updating status.`);
+              state.updateTransactionStatus(tx.txid, 'confirmed');
+            }
+          }
+        }
 
         if (stacksAddress && stacksAddress.startsWith('ST')) {
           const sbtcBal = await checkSbtcBalance(stacksAddress);
