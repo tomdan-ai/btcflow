@@ -8,9 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@stacks/network": "^7.3.1",
+    "@stacks/transactions": "^7.3.1",
+    "@stacks/wallet-sdk": "^7.2.0",
+    "@turnkey/http": "^3.17.1",
+    "@turnkey/sdk-browser": "^5.15.2",
+    "alex-sdk": "^3.2.1",
+    "axios": "^1.13.6",
+    "bitcoinjs-lib": "^7.0.1",
     "next": "16.2.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sats-connect": "^4.2.1",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
