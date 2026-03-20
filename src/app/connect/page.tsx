@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useStore } from '@/store/useStore';
-
 import { getAddress } from 'sats-connect';
+import LoadingLogo from '@/components/LoadingLogo';
 
 export default function ConnectPage() {
   const router = useRouter();
@@ -37,7 +37,6 @@ export default function ConnectPage() {
             network: { type: netType as any },
           },
           onFinish: (response) => {
-            // Prefer Stacks address, fallback to payment (BTC)
             const addr = response.addresses.find(a => a.purpose === 'stacks')?.address || 
                          response.addresses.find(a => a.purpose === 'payment')?.address;
             if (addr) {
@@ -60,7 +59,6 @@ export default function ConnectPage() {
         }
         setIsConnecting(false);
       } else if (wProvider === 'TURNKEY') {
-        // Keep mock for Turnkey as it requires backend integration
         setTimeout(() => {
           connect(email || 'dev@btcflow.xyz', 'TURNKEY');
           setIsConnecting(false);
@@ -75,40 +73,24 @@ export default function ConnectPage() {
   if (isConnected) {
     return (
       <div className="min-h-screen bg-[#0D0F14] flex items-center justify-center p-6">
-        <div className="max-w-[420px] w-full bg-[#161A22] border border-[#22C55E]/30 p-10 rounded-[12px] text-center space-y-6">
-          <div className="w-16 h-16 bg-[#22C55E]/10 rounded-full flex items-center justify-center border border-[#22C55E]/30 mx-auto">
-            <span className="text-3xl text-[#22C55E]">✓</span>
-          </div>
+        <div className="max-w-[420px] w-full bg-[#161A22] border border-[#F7931A]/20 p-10 rounded-[12px] text-center space-y-10">
+          <LoadingLogo size="medium" />
           <div className="space-y-2">
             <h1 className="text-2xl font-bold font-display text-white italic tracking-tighter uppercase">CONNECTED</h1>
-            <p className="text-[13px] text-[#8A94A8] font-mono uppercase tracking-widest leading-relaxed">
+            <p className="text-[11px] text-[#8A94A8] font-mono uppercase tracking-[0.2em]">
               SESSION SECURED WITH {walletProvider}
             </p>
           </div>
-          <div className="bg-[#0D0F14] p-4 rounded-lg border border-white/5 font-mono text-[11px] text-[#F7931A]">
+          <div className="bg-[#0D0F14] p-4 rounded-lg border border-white/5 font-mono text-[11px] text-[#F7931A] break-all">
             {address}
-          </div>
-          <div>
-            <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-[#F7931A] animate-[loading_2s_ease-in-out]"></div>
-            </div>
-            <p className="text-[10px] font-mono text-[#4A5168] mt-3 uppercase tracking-widest leading-relaxed">
-              PREPARING SECURE DEFI SESSION...
-            </p>
           </div>
           <Link 
             href="/dashboard"
-            className="inline-block w-full h-[50px] bg-white text-black font-bold rounded-[10px] flex items-center justify-center hover:bg-white/90 transition-colors"
+            className="inline-block w-full h-[54px] bg-white text-black font-black uppercase tracking-widest text-[12px] rounded-[4px] flex items-center justify-center hover:bg-white/90 transition-all active:scale-[0.98]"
           >
-            Go to Dashboard
+            Enter Dashboard
           </Link>
         </div>
-        <style jsx>{`
-          @keyframes loading {
-            0% { width: 0%; }
-            100% { width: 100%; }
-          }
-        `}</style>
       </div>
     );
   }
@@ -134,9 +116,12 @@ export default function ConnectPage() {
         <div className="max-w-[400px] w-full space-y-10">
           <div className="space-y-2 text-center md:text-left">
             <Link href="/" className="inline-block">
-              <h1 className="text-3xl font-display font-bold flex items-center gap-2">
-                <span className="text-[#F7931A]">BTC</span>Flow
-              </h1>
+              <div className="flex items-center gap-3">
+                <img src="/btcflow_logo.png" alt="BTCFlow Logo" className="w-10 h-10 object-contain" />
+                <h1 className="text-3xl font-display font-bold uppercase tracking-tighter">
+                  <span className="text-[#F7931A]">BTC</span>Flow
+                </h1>
+              </div>
             </Link>
             <p className="text-[#8A94A8] text-[14px]">Choose your gateway to Bitcoin DeFi</p>
           </div>
