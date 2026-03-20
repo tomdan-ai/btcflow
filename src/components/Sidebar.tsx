@@ -43,9 +43,13 @@ export default function Sidebar() {
   return (
     <aside className="w-16 xl:w-[240px] fixed h-full bg-[#161A22] border-r border-[rgba(255,255,255,0.07)] flex flex-col z-50 transition-all duration-300">
       <div className="p-4 xl:p-5 overflow-visible relative">
-        <Link href="/" className="flex items-center gap-1 mb-1 whitespace-nowrap group">
-          <span className="text-[#F7931A] font-bold text-xl font-display">BTC</span>
-          <span className="text-white font-bold text-xl font-display hidden xl:inline group-hover:text-[#F7931A] transition-colors">Flow</span>
+        <Link href="/" className="flex items-center gap-2 mb-2 whitespace-nowrap group">
+          <img 
+            src="/btcflow_logo.png" 
+            alt="BTCFlow Logo" 
+            className="w-8 h-8 xl:w-10 xl:h-10 object-contain transition-transform group-hover:scale-105" 
+          />
+          <span className="text-white font-bold text-lg font-display hidden xl:inline group-hover:text-[#F7931A] transition-colors uppercase tracking-tighter">BTCFlow</span>
         </Link>
         
         <div className="relative">
