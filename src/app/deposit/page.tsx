@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import LayoutShell from '@/components/LayoutShell';
 import { useStore } from '@/store/useStore';
 import { sendBtcTransaction } from 'sats-connect';
+import LoadingLogo from '@/components/LoadingLogo';
 
 export default function DepositPage() {
   const { balances, addTransaction, isConnected, address } = useStore();
@@ -167,18 +168,9 @@ export default function DepositPage() {
                   </button>
                 </div>
                 
-                <div className="flex flex-col items-center py-12 bg-[#161A22]/30 border border-white/5 rounded-[4px]">
-                  <div className="w-48 h-48 bg-white p-4 rounded-[4px] flex items-center justify-center border border-white/5 mb-6 shadow-[0_0_50px_rgba(255,255,255,0.05)]">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" fill="#0D0F14">
-                      {/* Stylized QR representation */}
-                      <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10zM45 45h10v10H45z" />
-                      <rect x="20" y="20" width="10" height="10" fill="white" />
-                      <rect x="70" y="20" width="10" height="10" fill="white" />
-                      <rect x="20" y="70" width="10" height="10" fill="white" />
-                      <path d="M45 15h10v5H45zM15 45h5v10h-5zM80 45h5v10h-5zM45 80h10v5H45z" />
-                    </svg>
-                  </div>
-                  <p className="text-[12px] text-[#8A94A8] font-mono animate-pulse tracking-widest uppercase italic">// Awaiting Bitcoin L1 Broadcast...</p>
+                <div className="flex flex-col items-center py-12 bg-[#161A22]/30 border border-white/5 rounded-[4px] space-y-8">
+                  <LoadingLogo size="medium" />
+                  <p className="text-[12px] text-[#8A94A8] font-mono animate-pulse tracking-widest uppercase italic font-black text-center">// Awaiting Bitcoin L1 Broadcast...</p>
                 </div>
               </div>
 
