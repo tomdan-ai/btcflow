@@ -11,6 +11,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 export const metadata: Metadata = {
   title: "BTCFlow - Bitcoin DeFi on Stacks",
   description: "One-click Bitcoin DeFi. No Stacks wallet. No bridge confusion. No friction.",
+  icons: {
+    icon: "/btcflow_logo.png",
+  },
 };
 
 export default function RootLayout({
