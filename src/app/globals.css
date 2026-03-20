@@ -1,26 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Colors */
+  --bg-deep: #0D0F14;
+  --bg-surface: #111318;
+  --panel-bg: #161A22;
+  --card-surface: #1C2130;
+  --border-default: rgba(255, 255, 255, 0.07);
+  --border-active: rgba(247, 147, 26, 0.35);
+  
+  --primary-accent: #F7931A; /* Bitcoin orange */
+  --secondary-accent: #4A9EFF; /* sBTC blue */
+  --success: #22C55E;
+  --danger: #EF4444;
+  --defi-purple: #A855F7;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --text-primary: #F0F2F7;
+  --text-secondary: #8A94A8;
+  --text-muted: #4A5168;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-uiform: 'Space Mono', monospace;
+  --font-body: 'IBM Plex Sans', sans-serif;
+
+  /* Spacing */
+  --base-unit: 8px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+code, .font-mono, .nav-label, .status-label {
+  font-family: var(--font-uiform);
+}
+
+/* Base Component Styles */
+input {
+  background-color: var(--bg-deep);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: rgba(247, 147, 26, 0.6);
+  box-shadow: 0 0 0 2px rgba(247, 147, 26, 0.2);
+}
+
+button.primary {
+  background-color: var(--primary-accent);
+  color: var(--bg-deep);
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+button.primary:hover {
+  opacity: 0.9;
+}
+
+button.secondary {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Table resets */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  font-family: var(--font-uiform);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }
