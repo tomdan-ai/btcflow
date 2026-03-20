@@ -5,6 +5,7 @@ import LayoutShell from '@/components/LayoutShell';
 import { useStore } from '@/store/useStore';
 import { AlexSDK } from 'alex-sdk';
 import { request } from 'sats-connect';
+import LoadingLogo from '@/components/LoadingLogo';
 
 export default function SwapPage() {
   const { balances, addTransaction, isConnected } = useStore();
@@ -161,15 +162,12 @@ export default function SwapPage() {
 
         {/* Transaction Status (Conditional) */}
         {isSwapping && (
-          <div className="mt-8 p-6 border border-white/5 rounded-[4px] bg-[#161A22]/50 flex items-center justify-between group animate-in slide-in-from-top-4 duration-500">
-            <div className="flex items-center gap-4">
-              <div className="w-5 h-5 border-2 border-[#4A5168] border-t-[#F7931A] rounded-full animate-spin"></div>
-              <div>
-                <p className="text-[12px] font-black text-white uppercase tracking-wider">Broadcasting to Stacks</p>
-                <p className="text-[10px] font-mono text-[#4A5168] uppercase mt-1">Estimating inclusion: ~2 min</p>
-              </div>
+          <div className="mt-8 p-10 border border-[#F7931A]/20 rounded-[4px] bg-[#161A22] flex flex-col items-center justify-center gap-8 animate-in slide-in-from-top-4 duration-500">
+            <LoadingLogo size="small" />
+            <div className="text-center">
+              <p className="text-[14px] font-black text-white uppercase tracking-[0.2em] italic">Broadcasting to Stacks</p>
+              <p className="text-[10px] font-mono text-[#4A5168] uppercase mt-2 tracking-widest font-black">// ESTIMATING INCLUSION: ~2 MIN</p>
             </div>
-            <button className="text-[10px] font-mono text-[#4A9EFF] hover:underline uppercase tracking-widest font-black">View Tx ↗</button>
           </div>
         )}
       </div>
